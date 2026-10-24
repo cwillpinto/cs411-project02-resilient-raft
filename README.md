@@ -1,7 +1,8 @@
 # CS411 Project 2 Resilient Raft
 
 **Instructor starter:** https://github.com/cwillpinto/cs411-project02-resilient-raft  
-**Due:** Wednesday, November 4, 2026 at 11:59 PM Central  
+**Due:** Wednesday, November 4, 2026 at 11:59 PM Central
+**Points:** 150 total, including the 15-point Distributed Phase Gate  
 **Task:** [Project_2_Resilient_Raft.md](Project_2_Resilient_Raft.md)
 
 This Go scaffold is intentionally incomplete. It includes protocol definitions, node TODOs, a KV store, and persistence helpers. It does not implement a working five-node cluster or fault-injection harness. Students build and verify those components as part of the project.
@@ -16,6 +17,10 @@ git remote add origin <your-repository-url>
 git remote -v
 git push -u origin <your-branch>
 ```
+
+## RPC bridge
+
+Week 7 RPC was missed. Read [RPC_Bridge.md](RPC_Bridge.md), then run `go run ./cmd/rpc_smoke` and expect `RPC_BRIDGE_READY` before building the Raft network layer.
 
 ## Generate and check
 
@@ -32,3 +37,4 @@ go test -race ./raft
 A scaffold build is only a setup check. Your own tests must cover leader election, log matching, leader completeness, and the specified crash, partition, and stale-rejoin cases in a five-node cluster. Document the exact launch and fault-injection commands.
 
 Submit your student-owned repository URL and commit SHA, launch instructions, test and race-detector output, fault commands and traces, and the Distributed Phase Gate command, trace, and supported claim through Blackboard.
+

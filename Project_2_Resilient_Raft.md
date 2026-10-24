@@ -1,9 +1,15 @@
 # ☁️ CS 411 Project 2: Resilient Raft
 
 **Instructor starter repository:** https://github.com/cwillpinto/cs411-project02-resilient-raft
+**Points:** 150 total, including the 15-point Distributed Phase Gate.
+**Due:** Wednesday, November 4, 2026 at 11:59 PM Central.
 **Objective:** Design and implement a Raft-replicated, in-memory key-value store in Go, communicating over gRPC, that survives node crashes and network partitions while preserving linearizable reads and writes — a real, unabridged consensus node, not the guided simulation you wrangled in Lab 8.
 
 ---
+
+## RPC bridge before the Raft work
+
+The Week 7 RPC class was missed. Start with [RPC_Bridge.md](https://github.com/cwillpinto/cs411-project02-resilient-raft/blob/main/RPC_Bridge.md) in the starter repository and run `go run ./cmd/rpc_smoke`. The bridge demonstrates a local gRPC request, response, and timeout. It prepares you for Phase 1; it does not replace the five-node cluster.
 
 ## 🌐 The Technical Challenge
 A single database server is a single point of failure. Real distributed datastores (etcd, CockroachDB, Consul) replicate every write across a cluster of nodes and use a consensus protocol to guarantee that, even when machines crash or the network partitions, every node that *does* respond agrees on the same sequence of committed operations — never two conflicting histories.
@@ -31,13 +37,15 @@ You will build a 5-node cluster where each node runs the full Raft protocol: lea
 ---
 
 ## ⚖️ Grading Rubric
-| Category | Weight | Description |
-| :--- | :--- | :--- |
-| Leader Election Correctness | 20% | Exactly one leader per term is ever elected; randomized timeouts prevent livelock; crashed leaders are replaced within one timeout window. |
-| Log Replication & Consistency | 25% | `AppendEntries` correctly detects and resolves log conflicts; commit index only advances on majority replication; no committed entry is ever lost or reordered. |
-| Fault Tolerance Under Induced Failures | 25% | Cluster continues serving correct `Get`/`Put` results through leader crash, minority partition, and stale-node rejoin scenarios exercised by the test harness. |
-| gRPC API & KV Store Functionality | 15% | `Get`/`Put`/`Delete` correctly routed to the current leader, correctly applied only after commit, correctly rejected/redirected when sent to a non-leader. |
-| Code Quality, Testing & Documentation | 15% | Race-free (`go test -race`), meaningful test coverage of the safety properties above, and a README documenting how to launch and stress-test the cluster. |
+| Category | Weight | Points | Description |
+| :--- | :---: | ---: | :--- |
+| Leader Election Correctness | 20% | 30 | Exactly one leader per term is ever elected; randomized timeouts prevent livelock; crashed leaders are replaced within one timeout window. |
+| Log Replication & Consistency | 25% | 37.5 | `AppendEntries` correctly detects and resolves log conflicts; commit index only advances on majority replication; no committed entry is ever lost or reordered. |
+| Fault Tolerance Under Induced Failures | 25% | 37.5 | Cluster continues serving correct `Get`/`Put` results through leader crash, minority partition, and stale-node rejoin scenarios exercised by the test harness. |
+| gRPC API & KV Store Functionality | 15% | 22.5 | `Get`/`Put`/`Delete` correctly routed to the current leader, correctly applied only after commit, correctly rejected/redirected when sent to a non-leader. |
+| Code Quality, Testing & Documentation | 15% | 22.5 | Race-free (`go test -race`), meaningful test coverage of the safety properties above, and a README documenting how to launch and stress-test the cluster. |
+
+The Distributed Phase Gate is **15 points within** the 37.5-point fault-tolerance criterion, not a separate assignment. Submit one reproducible fault-injection command, a timestamped term/leader/log or commit trace, and a short safety or recovery claim that the trace supports. The other 22.5 fault-tolerance points cover the required crash, minority-partition, and stale-rejoin behavior.
 
 ---
 

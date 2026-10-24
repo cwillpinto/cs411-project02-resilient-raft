@@ -1,0 +1,4 @@
+*.test.exe
+*.exe
+*.tmp
+.DS_Store

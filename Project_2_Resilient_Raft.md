@@ -55,4 +55,4 @@ The full Project 2 cluster, tests, README, and Distributed Phase Gate evidence a
 
 ---
 
-**Terminal-First Warning:** This project is graded by an automated harness that builds and stress-tests your cluster entirely from the command line (`go build ./...`, `go test ./raft`, and a scripted multi-process cluster launch with injected `SIGKILL`s and simulated network drops). If your implementation only behaves correctly inside your IDE's debugger, or depends on manual steps not captured in your README, it will be treated as non-functional. Verify your submission from a clean terminal before you turn it in.
+**Terminal verification:** Your project must build and run from a clean command line. Include `go build ./...`, `go test ./raft`, `go test -race ./raft`, and reproducible five-node fault commands in your README. The instructor will run those commands and examine the resulting crash, partition, and rejoin traces. The supplied starter has only an initial vote-persistence smoke test; you must add the full fault tests and implementation. An IDE-only demonstration cannot establish the required behavior.

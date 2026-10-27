@@ -1,6 +1,6 @@
 # CS411 Project 2 Resilient Raft
 
-**Instructor starter:** https://github.com/cwillpinto/cs411-project02-resilient-raft  
+**Starter:** https://github.com/cwillpinto/cs411-project02-resilient-raft  
 **Due:** Wednesday, November 4, 2026 at 11:59 PM Central
 **Points:** 150 total, including the 15-point Distributed Phase Gate  
 **Task:** [Project_2_Resilient_Raft.md](Project_2_Resilient_Raft.md)
